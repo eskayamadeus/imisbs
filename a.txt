@@ -1,0 +1,39 @@
+im trying to fix the logout error, 
+as well as strip the code down to its bare minimum, removing all the unnecessary stuff
+
+okay so, when admin is logged in, the other users shouldn't login too
+
+
+OBSERVATIONS (MARK ++ for completed tasks)
+pupil can log in. It redirects to pupil/home
+when pupil tries to logout, he's redirected to ibs.test. but if you use the back arrow to return, pupil is still logged in. CHECK LOGOUT
+remember me and forgot your password are not configured.
+Staff can login, and it redirects to staff/home
+Staff profile icon button does not pop up a menu
+Staff cannot logout. (MethodNotAllowedHttpException)
+Parent can login. Redirects to pupilparent/home
+Pupilparent can logout, but back arrow shows still logged in
+Visitor can login, redirects to visitor/home
+User sessions do not die at all. Going back several times reveals so many active users.
+there is a different set of login pages for each individual user type, and it's extremely unnecessary
+register page doesn't let you choose your role
+trying to login as admin through ibs.test/admin throws a 419, session expired on the first attempt. Possible CSRF problem?
+the 419 page generated when trying to login as admin gives a button which sends us back to ibs.test rather than ibs.test/admin
+The URL which appears at the 419 page is ibs.test/admin/login instead of ibs.test/admin
+Admin cannot logout. (MethodNotAllowedHttpException) 
+Admin logout error - GET and POST fields are empty
+
+
+acceptable answers for dealing with logout issue - 
+https://laracasts.com/discuss/channels/laravel/laravel-53-logout-methodnotallowed
+
+
+
+-------------------------------------
+updates: 
+- admin, pupil can logout. pressing back button shows the exact page they accessed before logging out. but when you refresh, you find they're indeed logged out.fix this
+- remove all vue from the app
+- include on all pages:
+	<!-- CSRF Token -->
+    	<meta name="csrf-token" content="{{ csrf_token() }}">
+- removed forgot your password feature. if required, restore it, by creating a dummy project and finding out how it was used

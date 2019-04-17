@@ -1,0 +1,37 @@
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+// the section which contains the mac, found in views.welcome
+#welcome-container{
+  padding: 30px 0;
+  .col-sm-6{
+    width: (100%/2);
+    img{
+      max-width:90%;
+    }
+    h1{
+      font-size: 6em;
+    }
+  }
+}
+
+// welcome page footer
+#welcome-footer{
+  /*background-color: invert($body-bg);*/
+  bottom: 0;
+  position: fixed;  
+  left:0;
+  right:0;
+}
