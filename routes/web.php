@@ -89,11 +89,22 @@ Route::group(['prefix' => 'admin'], function () {
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
   // Academic > Student
   Route::get('/academic/student', 'AdminController@showAcademicStudent')->name('admin.academic.student');
+  
+  // User > Pupil
+  // show all pupils
+  Route::get('/users/pupils', 'AdminController@showUserPupil')->name('admin.users.pupils');
+  // show form to add a new pupil
+  Route::get('/users/pupils/add', 'AdminController@showAddPupil')->name('admin.users.pupils.add');
+  // submit new pupil details
+  Route::post('/users/pupils/add', 'AdminController@createPupil');
+  // delete a pupil
+  Route::delete('/users/pupils/{pupil}', 'AdminController@destroyPupil');
+  
   // User > Staff
   // show all staff
-  Route::get('/users/staff', 'AdminController@showUserStaff')->name('admin.user.staff');
+  Route::get('/users/staff', 'AdminController@showUserStaff')->name('admin.users.staff');
   // show form to add a new staff
-  Route::get('/users/staff/add', 'AdminController@showAddStaff')->name('admin.user.staff.add');
+  Route::get('/users/staff/add', 'AdminController@showAddStaff')->name('admin.users.staff.add');
   // submit new staff details
   Route::post('/users/staff/add', 'AdminController@createStaff');
   // delete a staff

@@ -141,6 +141,47 @@ class AdminController extends Controller
     //     return redirect('/admin/login');
     // }
 
+    // CRUD for Pupil
+
+    function showUserPupil(){
+        $pupils = Pupil::orderBy('created_at', 'desc')->paginate();
+        return view('admin.users.pupils.view')->with('pupils', $pupils);
+    }
+
+    function showAddPupil(){
+        return view('admin.users.pupils.add');
+    }
+
+    // equivalent to the Resourceful Store function
+    function createPupil(Request $request){
+        // just going to validate a few inputs from the form we made. not everything is needed. role is nullable.
+        $validatedRequest = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'class' => 'required'
+        ]);
+
+        // get all inputs, both required and non-required
+        $pupils = Pupil::create($request->all());
+        if ($pupils) {
+            return back()->with('success', 'Pupil Added Successfully');
+        } else {
+            return back()->withInput($request->input())->withErrors($validatedRequest);
+        }
+    }
+
+    // equivalent to the Resourceful destroy function
+    public function destroyPupil($id)
+    {
+        $pupils = Pupil::find($id);
+
+        $pupils->delete();
+
+        return back()->with('success', 'Pupil Removed');
+    }
+
+    // CRUD for Staff
+
     function showUserStaff(){
         $staff = Staff::orderBy('created_at', 'desc')->paginate();
         return view('admin.users.staff.view')->with('staff', $staff);

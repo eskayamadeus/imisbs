@@ -100,9 +100,9 @@
         </a>
         <div id="collapseUsers" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="#">Students</a>
+            <a class="collapse-item" href="{{ route('admin.users.pupils') }}">Pupils</a>
             <a class="collapse-item" href="#">Parents</a>
-            <a class="collapse-item" href="{{ route('admin.user.staff') }}">Staff</a>
+            <a class="collapse-item" href="{{ route('admin.users.staff') }}">Staff</a>
             <a class="collapse-item" href="#">External Stakeholders</a>
           </div>
         </div>

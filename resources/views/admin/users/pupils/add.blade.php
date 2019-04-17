@@ -1,7 +1,7 @@
-<!-- this page is to add STAFF details in admin panel. @ admin/users/staff/add -->
+<!-- this page is to add PUPIL details in admin panel. @ admin/users/pupils/add -->
 @extends('layouts.dashboard')
 
-@section('title','Add Staff')
+@section('title','Add Pupil')
 
 @section('sidebar')
   <!-- call Admin's custom sidebar -->
@@ -14,7 +14,7 @@
 
   <!-- Page Heading -->
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Staff</h1>
+    <h1 class="h3 mb-0 text-gray-800">Pupils</h1>
     <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
       <i class="fas fa-download fa-sm text-white-50"></i> Generate Reports</a>
   </div>
@@ -27,12 +27,12 @@
 
     <!-- Earnings (Monthly) Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
-      <a href="{{ route('admin.users.staff.add') }}">
+      <a href="{{ route('admin.users.pupils.add') }}">
         <div class="card border-left-primary shadow h-100 py-2">
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <div class="text-lg font-weight-bold text-primary text-uppercase">Add Staff</div>
+                <div class="text-lg font-weight-bold text-primary text-uppercase">Add Pupil</div>
               </div>
               <div class="col-auto">
                 <i class="fas fa-plus fa-2x text-gray-300"></i>
@@ -45,12 +45,12 @@
 
     <!-- Earnings (Monthly) Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
-        <a href="{{ route('admin.users.staff')}}" class="">
+        <a href="{{ route('admin.users.pupils')}}" class="">
         <div class="card border-left-success shadow h-100 py-2">
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <div class="text-lg font-weight-bold text-success text-uppercase">View Staff</div>
+                <div class="text-lg font-weight-bold text-success text-uppercase">View Pupils</div>
               </div>
               <div class="col-auto">
                 <i class="fas fa-eye fa-2x text-gray-300"></i>
@@ -97,7 +97,7 @@
   <hr>
     @include('partials.success')
     @include('partials.warning')
-    <h5 class="h5 mb-0 text-gray-800 text-uppercase">New Staff Form</h5>
+    <h5 class="h5 mb-0 text-gray-800 text-uppercase">New Pupil Form</h5>
     <br>
 
     <!-- Content Row -->
@@ -107,7 +107,7 @@
         <!-- Find docs at https://github.com/LaravelCollective/docs/blob/5.4/html.md -->
         <div class="col-6 mb-4">
             {{-- 'action' => 'AdminController@createStaff' , --}}
-        {!! Form::open(['action' => 'AdminController@createStaff', 'class' => 'form']) !!}
+        {!! Form::open(['action' => 'AdminController@createPupil', 'class' => 'form']) !!}
             <!--format for using the form generation -->
             <!-- Form::elementType('name', 'output') !!} -->
 
@@ -116,8 +116,8 @@
             
             <div class="form-group">
                 <!-- Name -->
-                {!! Form::label('name', 'Staff Full Name') !!}
-                {!! Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Enter staff full name']) !!}
+                {!! Form::label('name', 'Pupil Full Name') !!}
+                {!! Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Enter pupil full name']) !!}
             </div>
 
             <div class="form-group">
@@ -133,21 +133,9 @@
             </div>
 
             <div class="form-group">
-                <!-- Subject -->
-                {!! Form::label('subject', 'subject') !!}
-                {!! Form::text('subject', '', ['class' => 'form-control', 'placeholder' => 'Subject']) !!}
-            </div>
-
-            <div class="form-group">
                 <!-- Class -->
                 {!! Form::label('class', 'class') !!}
                 {!! Form::text('class', '', ['class' => 'form-control', 'placeholder' => 'Assigned class']) !!}
-            </div>
-
-            <div class="form-group">
-                <!-- Special Role -->
-                {!! Form::label('role', 'Special Role') !!}
-                {!! Form::text('role', '', ['class' => 'form-control', 'placeholder' => 'Enter role']) !!}
             </div>
 
             <!--Submit -->
