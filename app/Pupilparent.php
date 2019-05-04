@@ -28,6 +28,11 @@ class Pupilparent extends Authenticatable
         'password', 'remember_token',
     ];
 
+    // a parent has one pupil
+    public function pupil(){
+        return $this->hasOne('App\Pupil');
+    }
+    
     /**
      * Send the password reset notification.
      *

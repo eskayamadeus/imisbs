@@ -12,14 +12,27 @@ class CreatePupilsTable extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
+
         Schema::create('pupils', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('class');
+            // reference the student's class
+            $table->integer('classroom_id')->unsigned()->nullable();
+            // reference the pupil's parent
+            $table->integer('pupilparent_id')->unsigned()->nullable();
+            
+
             $table->rememberToken();
             $table->timestamps();
+        });
+
+        Schema::table('pupils', function ($table) {
+            $table->foreign('classroom_id')->references('id')->on('classrooms');
+            // optionally add ->onDelete('cascade') or onUpdate
+            $table->foreign('pupilparent_id')->references('id')->on('pupilparents');
         });
     }
 

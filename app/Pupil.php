@@ -28,6 +28,17 @@ class Pupil extends Authenticatable
         'password', 'remember_token',
     ];
 
+    // a pupil belongs to a class(room)
+    public function classroom(){
+        return $this->belongsTo('App\Classroom');
+    }
+
+    // a pupil belongs to one parent
+    //public function pupilparent(){
+        //return $this->belongsTo(Pupilparent::class);
+       // return $this->belongsTo('App\Pupilparent');
+    //}
+
     /**
      * Send the password reset notification.
      *

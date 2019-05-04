@@ -39,38 +39,6 @@ Route::get('/pupil/dashboard', 'Auth\LoginController@pupilLogin')->name('pupil.l
 // set the route to POST otherwise you get a MethodNotFoundException because the form uses a POST
     Route::post('user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
-
-
-// ADMIN SECTION
-//Route::prefix('admin')->group(function() {
-    // Show Admin Login Form
-    //Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
-    // Submit Admin Login
-    //Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
-    // Logged in admin sees Dashboard
-    //Route::get('/', 'AdminController@index')->name('admin.dashboard');
-    // Admin Logout
-    //Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
-    // Academic > Student
-    //Route::get('/academic/student', 'AdminController@showAcademicStudent')->name('admin.academic.student');
-    //Route::get('/academic/student/add', 'AdminController@showAddStudent')->name('admin.academic.showAddStudent');
-//}); 
-// checks if request is either get or post
-// Route::match(['get', 'post'], '/admin', 'AdminController@login');
-
-
-// Loading the admin dashboard upon login
- //Route::get('/admin/dashboard', 'AdminController@dashboard');
-// Loading the admin settings from dashboard
-// Route::get('/admin/settings', 'AdminController@settings');
-// The current password validation under settings. defined in matrix.form_validation.js
-// Route::get('/admin/check-pwd', 'AdminController@chkPassword');
-// update admin password
-// Route::match(['get', 'post'], '/admin/update-pwd', 'AdminController@updatePassword');
-
-// // Admin Logout
-// Route::get('/logout', 'AdminController@logout');
-
 Route::group(['prefix' => 'admin'], function () {
   Route::get('/', 'AdminAuth\LoginController@showLoginForm');
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
@@ -87,10 +55,19 @@ Route::group(['prefix' => 'admin'], function () {
   Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset')->name('password.email');
   Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
-  // Academic > Student
-  Route::get('/academic/student', 'AdminController@showAcademicStudent')->name('admin.academic.student');
+
+  // SCHOOL > SETTINGS 
+  // show form to change school settings
+  Route::get('/school/settings', 'AdminController@showSchoolSettings')->name('admin.school.settings');
+  Route::patch('/school/settings/{id}', 'AdminController@updateSchool');
+
+  // FACILITIES > Teaching Facilities
+  Route::get('/facilities/teaching', 'AdminController@showTeachingFacilities') ->name('admin.facilities.teaching_facilities');
+  Route::get('/facilities/teaching/classrooms', 'AdminController@showClassrooms') ->name('admin.facilities.teaching_facilities.classrooms');
+  Route::get('/facilities/teaching/classrooms/add', 'AdminController@showAddClassroom') ->name('admin.facilities.teaching_facilities.classroom.add');
+  Route::post('/facilities/teaching/classrooms/add', 'AdminController@createClassroom');
   
-  // User > Pupil
+  // USER > Pupil
   // show all pupils
   Route::get('/users/pupils', 'AdminController@showUserPupil')->name('admin.users.pupils');
   // show form to add a new pupil
@@ -100,7 +77,7 @@ Route::group(['prefix' => 'admin'], function () {
   // delete a pupil
   Route::delete('/users/pupils/{pupil}', 'AdminController@destroyPupil');
   
-  // User > Staff
+  // USER > Staff
   // show all staff
   Route::get('/users/staff', 'AdminController@showUserStaff')->name('admin.users.staff');
   // show form to add a new staff
@@ -109,6 +86,16 @@ Route::group(['prefix' => 'admin'], function () {
   Route::post('/users/staff/add', 'AdminController@createStaff');
   // delete a staff
   Route::delete('/users/staff/{staff}', 'AdminController@destroyStaff');
+
+  // USER > Pupilparent
+  // show all pupilparents
+  Route::get('/users/pupilparents', 'AdminController@showUserPupilParent')->name('admin.users.pupilparents');
+  // show form to add a new pupil
+  Route::get('/users/pupilparents/add', 'AdminController@showAddPupilParent')->name('admin.users.pupilparents.add');
+  // submit new pupil details
+  Route::post('/users/pupilparents/add', 'AdminController@createPupilParent');
+  // delete a pupil
+  Route::delete('/users/pupilparents/{pupil}', 'AdminController@destroyPupilParent');
 });
 
 Route::group(['prefix' => 'pupil'], function () {

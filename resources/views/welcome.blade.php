@@ -258,9 +258,9 @@
     </div>
 
     <!--footer-->
-    <div id="welcome-footer" class="footer text-center bg-dark">
+    {{-- <div id="welcome-footer" class="footer text-center bg-dark">
         <a class="btn btn-link" href="">Contact Us</a>&nbsp;|&nbsp;
         <a class="btn btn-link" href="">About Us</a>&nbsp;|&nbsp;
         <a class="btn btn-link" href="">Terms &amp; Conditions</a>
-    </div>
+    </div> --}}
 @endsection

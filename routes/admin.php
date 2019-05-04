@@ -7,6 +7,7 @@ Route::get('/home', function () {
 
     //dd($users);
 
-    return view('admin.home');
+    $school = App\School::find(1);
+    return view('admin.home')->with('school', $school);
 })->name('home');
 

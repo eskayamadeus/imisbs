@@ -3,16 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-//use Auth;
-// if you run into some funny error later, try..
-// use Illuminate\Support\Facades\Auth;
 use Session;
 use App\Pupil;
 use App\Staff;
-// add user model
-//use App\Admin;
+use App\Pupilparent;
+use App\Classroom;
+use App\School;
 // enable passsword hash checking
-//use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -33,113 +31,100 @@ class AdminController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-     public function index()
-     {
-         //our default is view(home)
-         return view('admin.dashboard');
-     }
-    // public function login(Request $request)
-    // {
-    //     if($request->isMethod('post')){
-    //         $data = $request->input();
-    //         if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password']])){
-    //             // create a session for the admin when they login, and then we will compare the variable in every admin function to prevent unauthorised access to pages like the admin dashboard
-    //             Session::put('adminSession',$data['email']);
-    //             // redirect to admin dashboard
-    //             return redirect('/admin/dashboard');
-    //         }
-    //         else{
-    //             return redirect('/admin')->with('flash_message_error', 'Invalid Username or Password');
-    //         }
-    //     }
-    //     return view('admin.admin_login');
-    // }
-
-    // load the admin dashboard
-    // public function dashboard()
-    // {
-    //     // let's compare the session we created in the login function here. if they aren't logged in, force them to
-    //     if(Session::has('adminSession')){
-    //         // allow access
-    //     }else{
-    //         return redirect('/admin')->with('flash_message_error', 'Please log in first');
-    //     }
-    //     return view('admin.dashboard');
-    // }
-    public function dashboard()
-    {
-        return view('admin.dashboard');
+    // CRUD for School
+    function showSchoolSettings(){
+        $school = School::find(1);
+        return view('admin.school.settings')->with('school', $school);
     }
 
-    // academic > student
-    public function showAcademicStudent() 
-    {
-        $pupils = Pupil::orderBy('created_at', 'desc')->paginate();
-        return view('admin.academic.student')->with('pupils', $pupils);
+    // similar to Resourceful update/patch
+    function updateSchool(Request $request, $id){
+        // $this->validate($request, [
+        //     'title' => 'required',
+        //     'body' => 'required',
+        // ]);
+
+        // Create Post using Tinker format
+        $school = School::find($id);
+
+        $school->name = request('name');
+        $school->location = request('location');
+        $school->region = request('region');
+        $school->academic_year = request('year');
+        
+        
+        
+
+        if ($school->save()) {
+            return back()->with('success', 'School Updated Successfully');
+        } else {
+            return back()->withInput($request->input())->withErrors($validatedRequest);
+        }
+
+        //dd(request()->all());
     }
 
-    // academic > student > add
-    public function showAddStudent()
-    {
-        return view('admin.academic.addStudent');
+    // CRUD for Facilities
+    function showTeachingFacilities(){
+        return view('admin.facilities.teaching_facilities.view');
     }
 
-    // load the admin settings page
-    // public function settings()
-    // {
-    //     // let's compare the session we created in the login function here. if they aren't logged in, force them to
-    //     if(Session::has('adminSession')){
-    //         // allow access
-    //     }else{
-    //         return redirect('/admin')->with('flash_message_error', 'Please log in first');
-    //     }
-    //     return view('admin.settings');
-    // }
+    // facilities > classrooms
+    function showClassrooms(){
+        $classrooms = Classroom::all();
+        return view('admin.facilities.teaching_facilities.classrooms')->with('classrooms', $classrooms);
+    }
 
-    // check user's password in the settings page
-    // modify this code to allow for multiple admins. check original youtube video comments for the code
-    // public function chkPassword(Request $request){
-    //     $data = $request->all();
-    //     $current_password = $data['current_pwd'];
-    //     // for single admin
-    //     // $check_password = User::where(['admin'=>'1'])->first();
-    //     // for multiple admins
-    //     $check_password = User::where(['email'=>Auth::user()->email])->first();
-    //     if(Hash::check($current_password,$check_password->password)){
-    //         echo "true"; die;
-    //     }else {
-    //         echo "false"; die;
-    //     }
-    // }
+    function showAddClassroom(){
+        // we should return the teachers in the system here. so that we can assign class teacher straight from the classroom adder form
+        // toArray returns the staff names as a list.
+        // pluck removes the default array numbering and leaves us with a pure list
+        $staffName = Staff::all('name')->pluck('name')->toArray();
+        return view('admin.facilities.teaching_facilities.add')->with('staffName', $staffName);
+    }
 
-    // public function updatePassword(Request $request){
-    //     if($request->isMethod('post')){
-    //         $data = $request->all();
-    //         $check_password = User::where(['email' => Auth::user()->email])->first();
-    //         $current_password = $data['current_pwd'];
-    //         if(Hash::check($current_password,$check_password->password)){
-    //             $password = bcrypt($data['new_pwd']);
-    //             //for single admin
-    //             // User::where('id','1')->update(['password'=>$password]);
-    //             //for multiple admins
-    //             User::where('email',Auth::user()->email)->update(['password'=>$password]);
-    //             // for above line, you can also try User::where('id',$check_password->id)->update(['password'=>$password]); because id changes with every successive admin
-    //             return redirect('/admin/settings')->with('flash_message_success','Password updated Successfully!');
-    //         }else {
-    //             return redirect('/admin/settings')->with('flash_message_error','Incorrect Current Password!');
-    //         }
-    //     }
-    // }
-    // configure the admin logout. requires use session. 
-    // upon logging out, redirect to admin login page with a success message.
-    // public function logout()
-    // {
-    //     // Session::flush();
-    //     // you can get rid of session flush and use following line instead
-    //     Auth::guard('admin')->logout();
-    //     //return redirect('/admin')->with('flash_message_success', 'You have logged out');
-    //     return redirect('/admin/login');
-    // }
+    // equivalent to the Resourceful Store function
+    function createClassroom(Request $request){
+        // just going to validate a few inputs from the form we made. not everything is needed. role is nullable.
+        // $validatedRequest = $request->validate([
+        //     'name' => 'required',
+        // ]);
+
+        // get all inputs, both required and non-required
+        // $classrooms = Classroom::create($request->all());
+        // if ($classrooms) {
+        //     return back()->with('success', 'Classroom Added Successfully');
+        // } else {
+        //     return back()->withInput($request->input())->withErrors($validatedRequest);
+        // }
+
+        // request all details given
+
+        // use staff name to match staff id
+        // input staff id
+        // dd result
+        dd(request()->all());
+
+        // get ALL inputs, both required and non-required
+        //$staff = Staff::create($request->all());
+
+        //$staff = $request('staff');
+        //$staff = $request->query('staff');     
+        $staff = $request->staff->name;
+
+        $classroom = Classroom::create([
+            'name' => $request['name'],
+            'staff' => $staff,
+        ]);
+        if ($classroom) {
+            //return back()->with('success', 'Staff Added Successfully');
+            dd(request()->all());
+        } else {
+            return back()->withInput($request->input())->withErrors($validatedRequest);
+        }
+    }
+
+
 
     // CRUD for Pupil
 
@@ -194,6 +179,7 @@ class AdminController extends Controller
     // equivalent to the Resourceful Store function
     function createStaff(Request $request){
         // just going to validate a few inputs from the form we made. not everything is needed. role is nullable.
+        // configure the inputs that are absolutely necessary ONLY
         $validatedRequest = $request->validate([
             'name' => 'required',
             'email' => 'required',
@@ -201,8 +187,17 @@ class AdminController extends Controller
             'class' => 'required'
         ]);
 
-        // get all inputs, both required and non-required
-        $staff = Staff::create($request->all());
+        // get ALL inputs, both required and non-required
+        //$staff = Staff::create($request->all());
+        $staff = Staff::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'subject' => $request['subject'],
+            'role' => $request['role'],
+            'class' => $request['class'],
+            // can also use bcrypt instead of hash::make
+            'password' => Hash::make($request['password']),
+        ]);
         if ($staff) {
             return back()->with('success', 'Staff Added Successfully');
         } else {
@@ -219,4 +214,43 @@ class AdminController extends Controller
 
         return back()->with('success', 'Staff Removed');
     }
+
+    // CRUD for PupilParent
+
+    function showUserPupilParent(){
+        $pupilparents = Pupilparent::orderBy('created_at', 'desc')->paginate();
+        return view('admin.users.pupilparents.view')->with('pupilparents', $pupilparents);
+    }
+
+    function showAddPupilParent(){
+        return view('admin.users.pupilparents.add');
+    }
+
+    // equivalent to the Resourceful Store function
+    function createPupilParent(Request $request){
+        // just going to validate a few inputs from the form we made. not everything is needed. role is nullable.
+        $validatedRequest = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+        ]);
+
+        // get all inputs, both required and non-required
+        $pupilparents = Pupilparent::create($request->all());
+        if ($pupilparents) {
+            return back()->with('success', 'Parent Added Successfully');
+        } else {
+            return back()->withInput($request->input())->withErrors($validatedRequest);
+        }
+    }
+
+    // equivalent to the Resourceful destroy function
+    public function destroyPupilParent($id)
+    {
+        $pupilparents = Pupilparent::find($id);
+
+        $pupilparents->delete();
+
+        return back()->with('success', 'Parent Removed');
+    }
+
 }

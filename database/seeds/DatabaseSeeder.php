@@ -13,11 +13,14 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             AdminsTableSeeder::class,
-            PupilsTableSeeder::class,
+            SchoolsTableSeeder::class,
+            ClassroomsTableSeeder::class,
             PupilParentsTableSeeder::class,
+            PupilsTableSeeder::class,
             UsersTableSeeder::class,
             StaffTableSeeder::class,
             VisitorsTableSeeder::class,
+            FurnitureAndFixturesTableSeeder::class,
         ]);
     }
 }

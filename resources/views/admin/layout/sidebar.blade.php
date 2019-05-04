@@ -52,32 +52,12 @@
         <div id="collapseFacilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="#">Administration</a>
-            <a class="collapse-item" href="#">Teaching Facilities</a>
+            <a class="collapse-item" href="{{ route('admin.facilities.teaching_facilities') }}">Teaching Facilities</a>
             <a class="collapse-item" href="#">Recreational Facilities</a>
             <a class="collapse-item" href="#">Places of convienience</a>
           </div>
         </div>
       </li>
-
-      <!-- Nav Item - Pages Collapse Menu -->
-      {{-- <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Services</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-            <div class="collapse-divider"></div>
-            <h6 class="collapse-header">Other Pages:</h6>
-            <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item" href="blank.html">Blank Page</a>
-          </div>
-        </div>
-      </li> --}}
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
@@ -101,7 +81,7 @@
         <div id="collapseUsers" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{{ route('admin.users.pupils') }}">Pupils</a>
-            <a class="collapse-item" href="#">Parents</a>
+            <a class="collapse-item" href="{{ route('admin.users.pupilparents') }}">Parents</a>
             <a class="collapse-item" href="{{ route('admin.users.staff') }}">Staff</a>
             <a class="collapse-item" href="#">External Stakeholders</a>
           </div>
@@ -111,26 +91,19 @@
 
 
        <!-- Divider -->
-      {{-- <hr class="sidebar-divider"> --}}
+      <hr class="sidebar-divider">
 
       <!-- Heading -->
-      {{-- <div class="sidebar-heading">
-        Pages
-      </div> --}}
+      <div class="sidebar-heading">
+        School
+      </div>
 
       <!-- Nav Item - Charts -->
-      {{-- <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Help</span></a>
-      </li> --}}
-
-      <!-- Nav Item - Charts -->
-      {{-- <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.school.settings') }}">
           <i class="fas fa-fw fa-cog"></i>
-          <span>Admin Profile Setings</span></a>
-      </li> --}}
+          <span>School Setings</span></a>
+      </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">

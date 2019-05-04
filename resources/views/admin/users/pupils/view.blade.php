@@ -124,7 +124,7 @@
         <!-- Card Body -->
         <div class="card-body">
                     @if(count($pupils) > 0)
-                        <h5>Here you can view all staff.</h5>
+                        <h5>Here you can view all pupils.</h5>
                           <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                               <tr>

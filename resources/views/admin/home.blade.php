@@ -106,24 +106,25 @@
           <th>Detail</th>
         </tr>
       </thead>
-        <tbody>
-          <tr>
-            <td><strong>School Name</strong></td>
-            <td>University Primary School</td>
-          </tr>
-          <tr>
-            <td><strong>School Location</strong></td>
-            <td>Legon</td>
-          </tr>
-          <tr>
-            <td><strong>Region</strong></td>
-            <td>Greater Accra</td>
-          </tr>
-          <tr>
-            <td><strong>Academic Year</strong></td>
-            <td>2017/18</td>
-          </tr>
-        </tbody>
+      <!-- generate school information. -->
+      <tbody>
+        <tr>
+          <td><strong>School Name</strong></td>
+          <td>{{ $school->name }}</td>
+        </tr>
+        <tr>
+          <td><strong>School Location</strong></td>
+          <td>{{ $school->location }}</td>
+        </tr>
+        <tr>
+          <td><strong>Region</strong></td>
+          <td>{{ $school->region }}</td>
+        </tr>
+        <tr>
+          <td><strong>Academic Year</strong></td>
+          <td>{{ $school->academic_year }}</td>
+        </tr>
+      </tbody>
     </table>
   <!-- Content Row -->
 

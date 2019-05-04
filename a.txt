@@ -37,3 +37,18 @@ updates:
 	<!-- CSRF Token -->
     	<meta name="csrf-token" content="{{ csrf_token() }}">
 - removed forgot your password feature. if required, restore it, by creating a dummy project and finding out how it was used
+
+- make use of route::Resource
+
+-use for faker:
+'password' => bcrypt('secret'),
+-----------------------------------
+to do 
+
+break down routes into new resource controllers.
+remove forgot password, else enable it
+remove admin registration
+
+
+set up foreign key relationship between teacher and classroom, so that in the classrooom adder i can submit the teacher's id.
+so when the form submits the teacher's name, let the controller match that name to its ID and then enter the ID as a foreign key inside the classroom table.
