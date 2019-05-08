@@ -68,6 +68,8 @@ Route::group(['prefix' => 'admin'], function () {
 
   Route::get('/academic/subjects', 'AdminController@showSubjects')->name('admin.academic.subjects.view');
   Route::get('/academic/subjects/add', 'AdminController@showAddSubject')->name('admin.academic.subjects.add');
+  
+  Route::post('/academic/subjects/add', 'AdminController@createSubject');
 
   // FACILITIES > Teaching Facilities
   Route::get('/facilities/teaching', 'AdminController@showTeachingFacilities') ->name('admin.facilities.teaching_facilities');
@@ -79,9 +81,16 @@ Route::group(['prefix' => 'admin'], function () {
   
   // FACILITIES > Recreational Facilities
   Route::get('/facilities/recreational', 'AdminController@showRecreationalFacilities')->name('admin.facilities.recreational_facilities');
-
+  
   // FACILITIES > Places of convenience
   Route::get('/facilities/convenience', 'AdminController@showPlacesOfConvenience')->name('admin.facilities.places_of_convenience');
+  //washrooms
+  Route::get('/facilities/convenience/washrooms', 'AdminController@showWashroomFacilities')->name('admin.facilities.washrooms.view');
+  //canteens
+  Route::get('/facilities/convenience/canteens', 'AdminController@showCanteenFacilities')->name('admin.facilities.canteens.view');
+  //dispensaries
+  Route::get('/facilities/convenience/dispensaries', 'AdminController@showDispensaryFacilities')->name('admin.facilities.dispensaries.view');
+
 
   // USER > Pupil
   // show all pupils

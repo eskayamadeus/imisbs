@@ -10,6 +10,10 @@ use App\Pupilparent;
 use App\Classroom;
 use App\School;
 use App\Classteacher;
+use App\Subject;
+use App\Washroom;
+use App\Canteen;
+use App\Dispensary;
 // enable passsword hash checking
 use Illuminate\Support\Facades\Hash;
 
@@ -87,10 +91,21 @@ class AdminController extends Controller
   // CRUD for Facilities
     // subjects
     function showSubjects(){
-        return view('admin.academic.subjects.view');
+        $subjects = Subject::all();
+        return view('admin.academic.subjects.view')->with('subjects', $subjects);
     }
     function showAddSubject(){
         return view('admin.academic.subjects.add');
+    }
+
+    function createSubject(Request $request){
+        // get all inputs, both required and non-required
+        $subject = Subject::create($request->all());
+        if ($subject) {
+            return back()->with('success', 'Subject Added Successfully');
+        } else {
+            return back()->withInput($request->input())->withErrors($validatedRequest);
+        }
     }
 
 
@@ -99,8 +114,6 @@ class AdminController extends Controller
         return view('admin.facilities.teaching_facilities.view');
     }
 
-
->>>>>>> 853020efdd9225b15965c35a6e084868bccaf937
     // facilities > classrooms
     function showClassrooms(){
         $classrooms = Classroom::all();
@@ -187,6 +200,21 @@ class AdminController extends Controller
         return back()->with('success', 'Classroom Removed');
     }
 
+    // facilities > washrooms
+    function showWashroomFacilities(){        
+        $washrooms = Washroom::all();
+        return view('admin.facilities.places_of_convenience.washrooms.view')->with('washrooms', $washroooms);
+    }
+    // facilities > canteens
+    function showCanteenFacilities(){
+        $canteens = Canteen::all();
+        return view('admin.facilities.places_of_convenience.canteens.view')->with('canteens', $canteens);
+    }
+    // facilities > dispensaries
+    function showDispensaryFacilities(){    
+        $dispensaries = Dispensary::all();
+        return view('admin.facilities.places_of_convenience.dispensaries.view')->with('dispensaries', $dispensaries);
+    }
 
 
     // CRUD for Pupil

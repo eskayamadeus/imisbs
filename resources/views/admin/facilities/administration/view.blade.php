@@ -21,9 +21,9 @@
   <hr>
   <h3>Categories</h3>
     <ul>
-      <li><a href="">Staff Office</a></li>
-      <li><a href="">Principal Office</a></li>
-      <li><a href="">Account Office</a></li>
+      <li><a href="#">Staff Office</a></li>
+      <li><a href="#">Principal Office</a></li>
+    <li><a href="#">Account Office</a></li>
       
     </ul>
 

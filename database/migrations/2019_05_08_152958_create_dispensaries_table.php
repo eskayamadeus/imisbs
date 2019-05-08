@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWashroomsTable extends Migration
+class CreateDispensariesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,15 @@ class CreateWashroomsTable extends Migration
      */
     public function up()
     {
-        Schema::create('washrooms', function (Blueprint $table) {
+        Schema::create('dispensaries', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('dimension')->nullable();
-            $table->string('type')->nullable();
+            $table->string('dimension');
             // foreign key furniture and fixtures
             $table->integer('furniture_and_fixtures_id')->unsigned()->nullable();
             $table->timestamps();
         });
 
-        Schema::table('washrooms', function ($table) {
+        Schema::table('dispensaries', function ($table) {
             $table->foreign('furniture_and_fixtures_id')->references('id')->on('furniture_and_fixtures')->onUpdate('cascade')->onDelete('cascade');
         });
     }
@@ -35,6 +33,6 @@ class CreateWashroomsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('washrooms');
+        Schema::dropIfExists('dispensaries');
     }
 }

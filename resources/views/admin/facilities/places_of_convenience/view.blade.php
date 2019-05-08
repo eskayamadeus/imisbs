@@ -21,9 +21,9 @@
   <hr>
   <h3>Categories</h3>
     <ul>
-      <li><a href="">Washroom</a></li>
-      <li><a href="">Canteen</a></li>
-      <li><a href="">Dispensary</a></li>
+      <li><a href="{{ route('admin.facilities.washrooms.view') }}">Washroom</a></li>
+      <li><a href="{{ route('admin.facilities.canteens.view') }}">Canteen</a></li>
+      <li><a href="{{ route('admin.facilities.dispensaries.view') }}">Dispensary</a></li>
       
     </ul>
 
