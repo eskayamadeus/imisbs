@@ -27,12 +27,14 @@ class CreatePupilsTable extends Migration
 
             $table->rememberToken();
             $table->timestamps();
+
+            // extra proposed fields: sex, address, 
         });
 
         Schema::table('pupils', function ($table) {
-            $table->foreign('classroom_id')->references('id')->on('classrooms');
+            $table->foreign('classroom_id')->references('id')->on('classrooms')->onUpdate('cascade')->onDelete('cascade');
             // optionally add ->onDelete('cascade') or onUpdate
-            $table->foreign('pupilparent_id')->references('id')->on('pupilparents');
+            $table->foreign('pupilparent_id')->references('id')->on('pupilparents')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

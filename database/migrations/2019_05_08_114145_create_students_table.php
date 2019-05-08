@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePupilparentsTable extends Migration
+class CreateStudentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +13,9 @@ class CreatePupilparentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pupilparents', function (Blueprint $table) {
+        Schema::create('students', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->rememberToken();
             $table->timestamps();
-
-            // extra proposed fields: age/DoB, phone
         });
     }
 
@@ -31,6 +26,6 @@ class CreatePupilparentsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('pupilparents');
+        Schema::dropIfExists('students');
     }
 }

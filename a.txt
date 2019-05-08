@@ -52,3 +52,13 @@ remove admin registration
 
 set up foreign key relationship between teacher and classroom, so that in the classrooom adder i can submit the teacher's id.
 so when the form submits the teacher's name, let the controller match that name to its ID and then enter the ID as a foreign key inside the classroom table.
+
+lets have staff, classroom and then class_teachers table  	
+
+lets know the students of each class via a classroom_pupil table?
+
+how to delete multiple li from ul in laravel?
+
+make classroom name unique
+
+let only unassigned teachers show up in add classroom form

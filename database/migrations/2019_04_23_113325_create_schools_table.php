@@ -18,7 +18,7 @@ class CreateSchoolsTable extends Migration
             $table->string('name');
             $table->string('location');
             $table->string('region');
-            // can this update itself automatically? 
+            // can this update itself automatically as a default? 
             $table->string('academic_year');
             $table->timestamps();
         });

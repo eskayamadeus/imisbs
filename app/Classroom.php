@@ -13,4 +13,9 @@ class Classroom extends Model
     // public function pupils(){
     //     return $this->hasMany('App\Pupil');
     // }
+
+    // a classroom has one classteacher
+    public function classteacher(){
+        return $this->hasOne('App\Classteacher');
+    }
 }

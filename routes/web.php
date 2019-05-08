@@ -66,6 +66,8 @@ Route::group(['prefix' => 'admin'], function () {
   Route::get('/facilities/teaching/classrooms', 'AdminController@showClassrooms') ->name('admin.facilities.teaching_facilities.classrooms');
   Route::get('/facilities/teaching/classrooms/add', 'AdminController@showAddClassroom') ->name('admin.facilities.teaching_facilities.classroom.add');
   Route::post('/facilities/teaching/classrooms/add', 'AdminController@createClassroom');
+  // delete a classroom
+  Route::delete('/facilities/teaching/classrooms/{classroom}', 'AdminController@destroyClassroom');
   
   // USER > Pupil
   // show all pupils

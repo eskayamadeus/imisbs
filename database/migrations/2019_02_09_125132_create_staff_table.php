@@ -18,10 +18,13 @@ class CreateStaffTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('subject');
+            // should i not remove this?
             $table->string('class');
             $table->string('role')->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            // extra proposed fields: phone, 
         });
     }
 

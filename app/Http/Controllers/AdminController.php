@@ -9,6 +9,7 @@ use App\Staff;
 use App\Pupilparent;
 use App\Classroom;
 use App\School;
+use App\Classteacher;
 // enable passsword hash checking
 use Illuminate\Support\Facades\Hash;
 
@@ -79,7 +80,8 @@ class AdminController extends Controller
         // we should return the teachers in the system here. so that we can assign class teacher straight from the classroom adder form
         // toArray returns the staff names as a list.
         // pluck removes the default array numbering and leaves us with a pure list
-        $staffName = Staff::all('name')->pluck('name')->toArray();
+        //$staffName = Staff::all('name')->pluck('name')->toArray();
+        $staffName = Staff::pluck('name', 'id');
         return view('admin.facilities.teaching_facilities.add')->with('staffName', $staffName);
     }
 
@@ -103,25 +105,55 @@ class AdminController extends Controller
         // use staff name to match staff id
         // input staff id
         // dd result
-        dd(request()->all());
+        // dd([
+        //     'name' => $request->input('name'),
+        //     'id' => $request->input('staff'),
+        // ]);
 
         // get ALL inputs, both required and non-required
         //$staff = Staff::create($request->all());
 
         //$staff = $request('staff');
         //$staff = $request->query('staff');     
-        $staff = $request->staff->name;
+        //$staff = $request->staff->name;
+        //$staff = $request->input('staff.*.name');
 
         $classroom = Classroom::create([
-            'name' => $request['name'],
-            'staff' => $staff,
+            'name' => $request->input('name'),
+            //'id' => $request->input('staff'),
         ]);
-        if ($classroom) {
-            //return back()->with('success', 'Staff Added Successfully');
-            dd(request()->all());
+
+        // insert the staff's id into the class teacher table
+        $classteacher = Classteacher::create([
+            'staff_id' => $request->input('staff'),
+            // get the id of the classroom just created
+            'classroom_id' => Classroom::latest()->pluck('id')->first(),
+        ]);
+        //$staff->classroom_id = request('name');
+
+
+        if ($classroom && $classteacher) {
+            return back()->with('success', 'Classroom Added Successfully');
+            // dd([
+            //     request()->all(),
+            //     Classroom::latest()->pluck('id')->first(),
+            //     ]);
         } else {
             return back()->withInput($request->input())->withErrors($validatedRequest);
         }
+
+        // now i'm getting second thoughts. why not submit classroom name to classroom table 
+        // and then for the staff functionality, we can just add cllassroom id to staff table and use ibverse relatinship somewhere?
+    }
+
+    // equivalent to the Resourceful destroy function
+    public function destroyClassroom($id)
+    {
+        $classrooms = Classroom::find($id);
+
+        $classrooms->delete();
+
+        return back()->with('success', 'Classroom Removed');
     }
 
 
