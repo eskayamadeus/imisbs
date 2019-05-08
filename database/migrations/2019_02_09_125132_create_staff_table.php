@@ -25,6 +25,11 @@ class CreateStaffTable extends Migration
             $table->timestamps();
 
             // extra proposed fields: phone, 
+            // $table->integer('classroom_id')->unsigned()->nullable();
+            // $table->string('role');
+            // $table->string('phone_number');
+            // $table->string('email');
+            // $table->timestamps();
         });
     }
 

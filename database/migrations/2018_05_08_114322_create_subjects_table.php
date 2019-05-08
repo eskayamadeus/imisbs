@@ -16,15 +16,15 @@ class CreateSubjectsTable extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->increments('id');
             $table->string('subject_name');
-            $table->integer('pupil_id')->unsigned()->nullable();
-            $table->integer('teaching_staff_id')->unsigned()->nullable();
+            //$table->integer('pupil_id')->unsigned()->nullable();
+            //$table->integer('teaching_staff_id')->unsigned()->nullable();
             $table->integer('classroom_id')->unsigned()->nullable();
             $table->timestamps();
         });
 
           Schema::table('subjects', function ($table) {
-            $table->foreign('pupil_id')->references('id')->on('pupils')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('teaching_staff_id')->references('id')->on('teaching_staffs')->onUpdate('cascade')->onDelete('cascade');
+            //$table->foreign('pupil_id')->references('id')->on('pupils')->onUpdate('cascade')->onDelete('cascade');
+            //$table->foreign('teaching_staff_id')->references('id')->on('teaching_staffs')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('classroom_id')->references('id')->on('classrooms')->onUpdate('cascade')->onDelete('cascade');
             
             // optionally add ->onDelete('cascade') or onUpdate

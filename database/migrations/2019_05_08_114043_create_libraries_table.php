@@ -15,7 +15,12 @@ class CreateLibrariesTable extends Migration
     {
         Schema::create('libraries', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('furniture_and_fixtures_id')->unsigned()->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('libraries', function ($table) {
+            $table->foreign('furniture_and_fixtures_id')->references('id')->on('furniture_and_fixtures')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

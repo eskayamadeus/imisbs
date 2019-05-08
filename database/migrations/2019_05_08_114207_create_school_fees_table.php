@@ -15,7 +15,15 @@ class CreateSchoolFeesTable extends Migration
     {
         Schema::create('school_fees', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('fee_amount');
+            $table->integer('pupil_id')->unsigned()->nullable();
             $table->timestamps();
+        });
+
+             Schema::table('school_fees', function ($table) {
+            $table->foreign('pupil_id')->references('id')->on('pupils')->onUpdate('cascade')->onDelete('cascade');
+            
+            // optionally add ->onDelete('cascade') or onUpdate
         });
     }
 

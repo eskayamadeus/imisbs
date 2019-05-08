@@ -19,6 +19,9 @@ class CreatePupilsTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->date('dateofbirth')->nullable();
+            // subject id
+            $table->integer('subject_id')->unsigned()->nullable();
             // reference the student's class
             $table->integer('classroom_id')->unsigned()->nullable();
             // reference the pupil's parent
@@ -32,6 +35,7 @@ class CreatePupilsTable extends Migration
         });
 
         Schema::table('pupils', function ($table) {
+            $table->foreign('subject_id')->references('id')->on('subjects')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('classroom_id')->references('id')->on('classrooms')->onUpdate('cascade')->onDelete('cascade');
             // optionally add ->onDelete('cascade') or onUpdate
             $table->foreign('pupilparent_id')->references('id')->on('pupilparents')->onUpdate('cascade')->onDelete('cascade');
