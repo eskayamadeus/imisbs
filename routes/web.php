@@ -61,8 +61,13 @@ Route::group(['prefix' => 'admin'], function () {
   Route::get('/school/settings', 'AdminController@showSchoolSettings')->name('admin.school.settings');
   Route::patch('/school/settings/{id}', 'AdminController@updateSchool');
 
+
   // FACILITIES > Administration
   Route::get('/facilities/administration', 'AdminController@showAdminFacilities')->name('admin.facilities.administration');
+
+
+  Route::get('/academic/subjects', 'AdminController@showSubjects')->name('admin.academic.subjects.view');
+  Route::get('/academic/subjects/add', 'AdminController@showAddSubject')->name('admin.academic.subjects.add');
 
   // FACILITIES > Teaching Facilities
   Route::get('/facilities/teaching', 'AdminController@showTeachingFacilities') ->name('admin.facilities.teaching_facilities');

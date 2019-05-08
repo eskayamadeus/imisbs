@@ -85,9 +85,22 @@ class AdminController extends Controller
 
 
   // CRUD for Facilities
+    // subjects
+    function showSubjects(){
+        return view('admin.academic.subjects.view');
+    }
+    function showAddSubject(){
+        return view('admin.academic.subjects.add');
+    }
+
+
+    // CRUD for Facilities
     function showTeachingFacilities(){
         return view('admin.facilities.teaching_facilities.view');
     }
+
+
+>>>>>>> 853020efdd9225b15965c35a6e084868bccaf937
     // facilities > classrooms
     function showClassrooms(){
         $classrooms = Classroom::all();
