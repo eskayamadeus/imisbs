@@ -65,10 +65,20 @@ class AdminController extends Controller
         //dd(request()->all());
     }
 
+    // subjects
+    function showSubjects(){
+        return view('admin.academic.subjects.view');
+    }
+    function showAddSubject(){
+        return view('admin.academic.subjects.add');
+    }
+
+
     // CRUD for Facilities
     function showTeachingFacilities(){
         return view('admin.facilities.teaching_facilities.view');
     }
+
 
     // facilities > classrooms
     function showClassrooms(){
