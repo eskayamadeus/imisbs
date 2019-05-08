@@ -51,10 +51,10 @@
         </a>
         <div id="collapseFacilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="#">Administration</a>
+            <a class="collapse-item" href="{{ route('admin.facilities.administration')}}">Administration</a>
             <a class="collapse-item" href="{{ route('admin.facilities.teaching_facilities') }}">Teaching Facilities</a>
-            <a class="collapse-item" href="#">Recreational Facilities</a>
-            <a class="collapse-item" href="#">Places of convienience</a>
+            <a class="collapse-item" href="{{ route('admin.facilities.recreational_facilities') }}">Recreational Facilities</a>
+            <a class="collapse-item" href="{{ route('admin.facilities.places_of_convenience') }}">Places of convienience</a>
           </div>
         </div>
       </li>

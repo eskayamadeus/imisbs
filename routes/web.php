@@ -61,6 +61,9 @@ Route::group(['prefix' => 'admin'], function () {
   Route::get('/school/settings', 'AdminController@showSchoolSettings')->name('admin.school.settings');
   Route::patch('/school/settings/{id}', 'AdminController@updateSchool');
 
+  // FACILITIES > Administration
+  Route::get('/facilities/administration', 'AdminController@showAdminFacilities')->name('admin.facilities.administration');
+
   // FACILITIES > Teaching Facilities
   Route::get('/facilities/teaching', 'AdminController@showTeachingFacilities') ->name('admin.facilities.teaching_facilities');
   Route::get('/facilities/teaching/classrooms', 'AdminController@showClassrooms') ->name('admin.facilities.teaching_facilities.classrooms');
@@ -69,6 +72,12 @@ Route::group(['prefix' => 'admin'], function () {
   // delete a classroom
   Route::delete('/facilities/teaching/classrooms/{classroom}', 'AdminController@destroyClassroom');
   
+  // FACILITIES > Recreational Facilities
+  Route::get('/facilities/recreational', 'AdminController@showRecreationalFacilities')->name('admin.facilities.recreational_facilities');
+
+  // FACILITIES > Places of convenience
+  Route::get('/facilities/convenience', 'AdminController@showPlacesOfConvenience')->name('admin.facilities.places_of_convenience');
+
   // USER > Pupil
   // show all pupils
   Route::get('/users/pupils', 'AdminController@showUserPupil')->name('admin.users.pupils');
